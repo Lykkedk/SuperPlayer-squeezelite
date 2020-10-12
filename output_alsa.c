@@ -22,6 +22,8 @@
  *   -Launch script on power status change from LMS
  */
 
+/*	  Compiled and hacked for integration with CamillaDSP		*/
+
 // Output using Alsa
 
 #include "squeezelite.h"

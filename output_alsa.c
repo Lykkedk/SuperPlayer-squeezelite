@@ -22,7 +22,10 @@
  *   -Launch script on power status change from LMS
  */
 
-/*	  Compiled and hacked for integration with CamillaDSP		*/
+// Hacked for integration with CamillaDSP
+
+// Define path to sample rate switching script for CamillaDSP
+#define CONFIG_CMD_PATH "/home/tc/camilladsp/update_config.py"
 
 // Output using Alsa
 
@@ -360,16 +363,15 @@ static int alsa_open(const char *device, unsigned sample_rate, unsigned alsa_buf
 
 	UNLOCK;
 
-	if(sample_rate == 44100) system("python3 /home/tc/DSP_Engine/filters/exec_44100.py");
-    	if(sample_rate == 96000) system("python3 /home/tc/DSP_Engine/filters/exec_96000.py");
-	if(sample_rate == 48000) system("python3 /home/tc/DSP_Engine/filters/exec_48000.py");
-	if(sample_rate == 88200) system("python3 /home/tc/DSP_Engine/filters/exec_88200.py");
-	if(sample_rate == 176400) system("python3 /home/tc/DSP_Engine/filters/exec_176400.py");
-	if(sample_rate == 192000) system("python3 /home/tc/DSP_Engine/filters/exec_192000.py");
-	if(sample_rate == 352800) system("python3 /home/tc/DSP_Engine/filters/exec_352800.py");
-	if(sample_rate == 384000) system("python3 /home/tc/DSP_Engine/filters/exec_384000.py");
-
-	LOG_INFO("Sample rate filter changed ! %u", sample_rate);
+	char config_cmd[64];
+ 	sprintf(config_cmd, "%s %d", CONFIG_CMD_PATH, sample_rate);
+ 	int system_return = system(config_cmd);
+ 	if (system_return == 0) {
+     		LOG_INFO("Sample rate changed to %u", sample_rate);
+    	}
+    	else {
+        	LOG_ERROR("Could not set sample rate %u", sample_rate);
+    	}
 
 	/*
 	*	CamillaDSP integration STOP
@@ -714,6 +716,7 @@ static void *output_thread(void *arg) {
 
 			// FIXME - some alsa hardware requires opening twice for a new sample rate to work
 			// this is a workaround which should be removed
+			// CamillaDSP hack --- ORIGINAL=(alsa.reopen) CamillaDSP hack=(!alsa.reopen)
 			if (!alsa.reopen) {
 #if DSD
 				alsa_open(output.device, output.current_sample_rate, output.buffer, output.period, output.outfmt);

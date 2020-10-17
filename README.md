@@ -1,4 +1,8 @@
-Build howto ::
+### Build howto ::
+
+git clone https://github.com/Lykkedk/SuperPlayer-squeezelite.git\
+cd SuperPlayer-squeezelite\
+git checkout V2B_SuperPlayer-squeezelite
 
 make clean && make --makefile=Makefile.rpi
 

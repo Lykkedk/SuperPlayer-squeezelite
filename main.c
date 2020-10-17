@@ -105,6 +105,10 @@ static void usage(const char *argv0) {
 		   "  -P <filename>\t\tStore the process id (PID) in filename\n"
 #endif
 		   "  -r <rates>[:<delay>]\tSample rates supported, allows output to be off when squeezelite is started; rates = <maxrate>|<minrate>-<maxrate>|<rate1>,<rate2>,<rate3>; delay = optional delay switching rates in ms\n"
+#if SPLAYER
+		   "  -J <filename>\tAbsolute path to config-files\n"
+#endif
+
 #if GPIO
 			"  -S <Power Script>\tAbsolute path to script to launch on power commands from LMS\n"
 #endif
@@ -207,6 +211,9 @@ static void usage(const char *argv0) {
 #endif
 #if IR
 		   " IR"
+#endif
+#if SPLAYER
+		   " SPLAYER"
 #endif
 #if GPIO
 		   " GPIO"
@@ -373,6 +380,9 @@ int main(int argc, char **argv) {
 #endif
 #if IR
 						  "i"
+#endif
+#if SPLAYER
+						  "J"
 #endif
 #if defined(GPIO) && defined(RPI)
 						  "G"
@@ -644,6 +654,11 @@ int main(int argc, char **argv) {
 				usage(argv[0]);
 				exit(1);
 			}
+			break;
+#endif
+#if SPLAYER
+		case 'J':
+			printf("SuperPlayer test if squeezelite -J works \n\n");
 			break;
 #endif
 #if GPIO

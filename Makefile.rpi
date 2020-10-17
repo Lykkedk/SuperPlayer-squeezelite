@@ -1,4 +1,4 @@
-OPTS = -DALSA -DDSD -DEVENTFD -DFFMPEG -DGPIO -DIR -DLINUX -DNO_SSLSYM -DOPUS -DRESAMPLE -DRPI -DSSL -DVISEXPORT -I./include -I./include/opus -I./include/alac -I/usr/local/include -s -march=armv6 -mfloat-abi=hard -mfpu=vfp
+OPTS = -DSPLAYER -DALSA -DDSD -DEVENTFD -DFFMPEG -DGPIO -DIR -DLINUX -DNO_SSLSYM -DRESAMPLE -DRPI -DSSL -DVISEXPORT -I./include -I./include/opus -I./include/alac -I/usr/local/include -s -march=armv6 -mfloat-abi=hard -mfpu=vfp
 
 LDFLAGS=-L./lib -L/usr/local/lib -s -lgomp
 

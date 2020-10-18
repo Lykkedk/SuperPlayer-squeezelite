@@ -1,5 +1,21 @@
-OPTS = -DSPLAYER -DALSA -DDSD -DEVENTFD -DFFMPEG -DGPIO -DIR -DLINUX -DNO_SSLSYM -DRESAMPLE -DRPI -DSSL -DVISEXPORT -I./include -I./include/opus -I./include/alac -I/usr/local/include -s -march=armv6 -mfloat-abi=hard -mfpu=vfp
+# orginal from github: 
+# OPTS = -DOPUS -DALAC -DRESAMPLE -DVISEXPORT -DDSD -DIR -DGPIO -DRPI -DUSE_SSL -DLINKALL -I./include -I./include/opus -I./include/alac -I/usr/local/include -s -march=armv6 -mfloat-abi=hard -mfpu=vfp
+
+# pCP:
+OPTS = -DALSA -DDSD -DEVENTFD -DFFMPEG -DGPIO -DIR -DLINUX -DNO_SSLSYM -DOPUS -DRESAMPLE -DRPI -DSSL -DVISEXPORT -I./include -I./include/opus -I./include/alac -I/usr/local/include -s -march=armv6 -mfloat-abi=hard -mfpu=vfp
+
+# Jesper's:
+#OPTS = -DRESAMPLE -DVISEXPORT -DDSD -DIR -DGPIO -DRPI -DUSE_SSL -DNO_SSLSYM -I./include -I./include/opus -I./include/alac -I/usr/local/include -s -march=armv6 -mfloat-abi=hard -mfpu=vfp
+
 
 LDFLAGS=-L./lib -L/usr/local/lib -s -lgomp
 
 include Makefile
+
+
+
+#			1		2		3		4		5		6		7		8		9		10		11		12		13		14		15
+# git: 		ALAC			DSD						GPIO	IR		LINKALL					  OPUS	RESAMPLE RPI			USE_SSL	VISEXPORT
+# pCP:				ALSA	DSD		EVENTFD	FFMPEG	GPIO	IR				LINUX	NO_SSLSYM OPUS	RESAMPLE RPI	SSL				VISEXPORT
+# Jespers:					DSD						GPIO	IR						NO_SSLSYM		RESAMPLE RPI			USE_SSL	VISEXPORT 
+# wineds: 			ALSA	DSD 	EVENTFD 						LINKALL	LINUX	NO_SSLSYM		RESAMPLE RPI 	SSL				VISEXPORT
